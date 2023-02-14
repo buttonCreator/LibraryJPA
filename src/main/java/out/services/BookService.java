@@ -9,9 +9,7 @@ import out.models.Book;
 import out.models.Person;
 import out.repositories.BookRepository;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -92,6 +90,12 @@ public class BookService {
         book.setPerson_id(selectedPerson);
         book.setDateOfTaking(new Date());
         bookRepository.save(book);
+
+    }
+
+    public List<Book> searchBook(String startingString) {
+
+        return bookRepository.findByNameStartingWith(startingString);
 
     }
 

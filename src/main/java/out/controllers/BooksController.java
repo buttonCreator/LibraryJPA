@@ -112,4 +112,17 @@ public class BooksController {
 
     }
 
+    @GetMapping("/search")
+    public String search(@ModelAttribute("book") Book book){
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String foundSearch(@RequestParam("query") String query,  Model model) {
+
+        model.addAttribute("foundBooks", bookService.searchBook(query));
+
+        return "books/search";
+    }
+
 }
