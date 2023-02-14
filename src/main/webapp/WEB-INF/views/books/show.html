@@ -2,39 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Книга</title>
+    <title>Book</title>
 </head>
 <body>
 
-<p th:text="${book.getNameBook() + ', ' + book.getYearOfWriting()}">Id</p>
+<p th:text="${book.getName() + ', ' + book.getYearOfWriting()}">Id</p>
 
 <div th:if="${owner}">
-    <span>Книга сейчас у: </span> <span th:text="${owner.getName()}"></span>
+    <span>book now at the: </span> <span th:text="${owner.getName()}"></span>
 
-    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId_book()})}">
-        <input type="submit" value="Освободить книгу">
+    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+        <input type="submit" value="Set the book free">
     </form>
 
 </div>
 
 <div th:if="${people}">
 
-    <span>Это книга свободна</span>
-    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId_book()})}">
+    <span>This book is free</span>
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
 
-        <label>Выберете человека</label>
-        <select th:object="${person}" th:field="*{id_person}" id="person">
-            <option th:each="person : ${people}" th:value="${person.getId_person()}" th:text="${person.getName()}"></option>
+        <label>Choose a person</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}"></option>
         </select>
-        <input type="submit" value="Назначить книгу">
+        <input type="submit" value="Assign a book">
 
     </form>
 
 </div>
 
-<a th:href="@{/books/{id}/edit(id=${book.getId_book()})}">Обновить книгу</a>
+<a th:href="@{/books/{id}/edit(id=${book.getId()})}">Update book</a>
 
-<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId_book()})}">
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
   <input type="submit" value="delete"/>
 </form>
 
