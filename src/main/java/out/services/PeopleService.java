@@ -9,6 +9,7 @@ import out.models.Person;
 import out.repositories.PeopleRepository;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,17 @@ public class PeopleService {
         if (person.isPresent()) {
 
             Hibernate.initialize(person.get().getBooks());
+            Date date = new Date();
+
+            for (Book book : person.get().getBooks()) {
+
+                if (date.getTime() - book.getDateOfTaking().getTime() > 864000000)
+                    book.setExpired(true);
+
+                System.out.println(date.getTime() - book.getDateOfTaking().getTime());
+
+            }
+
             return person.get().getBooks();
 
         } else

@@ -37,6 +37,9 @@ public class Book {
     @Column(name = "date_of_taking")
     private Date dateOfTaking;
 
+    @Transient
+    private boolean expired;
+
     public Book() {
 
     }
@@ -101,6 +104,14 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public boolean getExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 
     @Override
